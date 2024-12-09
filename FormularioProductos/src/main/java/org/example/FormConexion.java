@@ -17,36 +17,33 @@ public class FormConexion {
     private JLabel EtiquetaPuerto;
     private JLabel EtiquetaUser;
     private JLabel EtiquetaPass;
-    private JButton conectarButton;
+    private JButton conectarButton;  // Asegúrate de que este campo esté presente
     private JButton cancelarButton;
     private Connection conexion;
     private JFrame frame;
 
-
     public FormConexion(JFrame frame) {
         this.frame = frame;
+        // Usar la configuración generada por IntelliJ para asignar los botones y otros componentes
         conectarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(textFieldServidor.getText().equals("") || textFieldPuerto.getText().equals("") || textFieldUsuario.getText().equals("")) {
+                if (textFieldServidor.getText().equals("") || textFieldPuerto.getText().equals("") || textFieldUsuario.getText().equals("")) {
                     JOptionPane.showMessageDialog(frame, "Ingrese todos los datos para conectar");
-                }else
-                {
-
-                    String url="jdbc:mysql://"+textFieldServidor.getText()+":"+textFieldPuerto.getText()+"/northwind";
+                } else {
+                    String url = "jdbc:mysql://" + textFieldServidor.getText() + ":" + textFieldPuerto.getText() + "/northwind";
                     String password = new String(passwordField.getPassword());
                     try {
-                        Connection conexion= DriverManager.getConnection(url,textFieldUsuario.getText(),password);
+                        Connection conexion = DriverManager.getConnection(url, textFieldUsuario.getText(), password);
                         JOptionPane.showMessageDialog(frame, "Conexión exitosa");
-                        FormProductos fp=new FormProductos(conexion);
-
+                        FormProductos fp = new FormProductos(conexion);
                     } catch (SQLException ex) {
                         JOptionPane.showMessageDialog(frame, ex.getMessage());
-                        //ex.printStackTrace();
                     }
                 }
             }
         });
+
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
