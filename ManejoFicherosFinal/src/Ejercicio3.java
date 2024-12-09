@@ -1,3 +1,5 @@
+package src;
+
 import javax.swing.*;
 import java.io.File;
 
@@ -9,6 +11,7 @@ import java.io.File;
 public class Ejercicio3 {
     public static void main(String[] args) {
         File ficheroRestaurantes=GestionFicheros.seleccionFicheroCSV();
+
         String nombre,direccion,ciudad,provincia,codigo;
         nombre= JOptionPane.showInputDialog(null, "Introduce nombre");
         direccion = JOptionPane.showInputDialog(null,"Introduce direccion");

@@ -1,3 +1,5 @@
+package src;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -187,5 +189,37 @@ public class GestionFicheros {
         public String getDescription() {
             return "Archivos CSV (*.csv)";
         }
+    }
+    public static File crearFicheroCSV(String nombreFichero) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Seleccionar directorio para guardar el fichero CSV");
+
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int userSelection = fileChooser.showSaveDialog(null);
+        File ficheroAGuardar = null;
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File directorioSeleccionado = fileChooser.getSelectedFile();
+
+            if (!nombreFichero.toLowerCase().endsWith(".csv")) {
+                nombreFichero += ".csv";
+            }
+            ficheroAGuardar = new File(directorioSeleccionado, nombreFichero);
+
+        }
+
+        try {
+            if (ficheroAGuardar.createNewFile()) {
+                System.out.println("Fichero guardado en: " + ficheroAGuardar.getAbsolutePath());
+            } else {
+                System.out.println("Operación cancelada o fallo en la selección del fichero.");
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return ficheroAGuardar;
     }
 }
